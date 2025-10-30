@@ -1,0 +1,32 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "MERN project",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+  "start": "node backend/server.js", 
+  "server": "nodemon backend/server.js",
+  "client": "npm start --prefix frontend",
+  "dev": "concurrently \"npm run server\" \"npm run client\"",
+  "build": "cd frontend && npm install && npm run build",
+  "data:import": "node backend/seeder.js",
+  "data:destroy": "node backend/seeder.js -d"
+},
+  "author": "shahzaib",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "colors": "^1.4.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10"
+  }
+}
