@@ -5,6 +5,8 @@ import Rating from './Rating';
 import { getFullImageUrl } from '../utils/imageUtils';
 
 const Product = ({ product }) => {
+    
+
     return (
         <Card className='my-3 p-3 rounded'>
             <Link to={`/product/${product._id}`}>
@@ -12,6 +14,7 @@ const Product = ({ product }) => {
                     src={getFullImageUrl(product.image)}
                     variant='top'
                 />
+
             </Link>
 
             <Card.Body>
