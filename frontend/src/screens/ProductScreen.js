@@ -53,6 +53,7 @@ const ProductScreen = () => {
                             fluid
                         />
 
+
                     </Col>
 
                     <Col md={3}>
