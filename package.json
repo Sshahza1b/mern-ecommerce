@@ -16,6 +16,8 @@
   "author": "shahzaib",
   "license": "MIT",
   "dependencies": {
+    "ajv": "^6.12.6",
+    "ajv-keywords": "^3.5.2",
     "bcryptjs": "^3.0.2",
     "colors": "^1.4.0",
     "dotenv": "^17.2.2",
