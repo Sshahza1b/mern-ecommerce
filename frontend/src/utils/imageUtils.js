@@ -6,7 +6,11 @@ export const getFullImageUrl = (imagePath) => {
     return imagePath;
   }
 
-  // Otherwise, prefix with your backend URL
+  // Otherwise, use your backend URL
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-  return `${backendUrl}${imagePath}`;
+
+  // Ensure that imagePath starts with a slash
+  const formattedImagePath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+
+  return `${backendUrl}${formattedImagePath}`;
 };
