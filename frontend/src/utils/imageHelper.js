@@ -1,5 +1,5 @@
 export const getFullImageUrl = (imagePath) => {
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   if (!imagePath) return '/images/default.png';
 

@@ -30,7 +30,7 @@ const upload = multer({ storage });
 router.post('/', upload.single('image'), (req, res) => {
     res.send({
         message: 'File uploaded successfully',
-        image: `/uploads/${req.file.filename}`, // ✅ fixed line
+        image: `/uploads/${req.file.filename}`,
     });
 });
 

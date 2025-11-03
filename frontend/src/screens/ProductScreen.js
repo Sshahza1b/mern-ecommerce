@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { getFullImageUrl } from '../utils/imageUtils';
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
@@ -26,7 +27,6 @@ const ProductScreen = () => {
         navigate(`/cart/${id}?qty=${qty}`)
     }
 
-    const backendUrl = 'http://localhost:5000';
 
     return (
         <>
@@ -42,17 +42,10 @@ const ProductScreen = () => {
                 <Row>
                     <Col md={6}>
                         <Image
-                            src={
-                                product.image
-                                    ? product.image.startsWith('/uploads')
-                                        ? `${backendUrl}${product.image}`
-                                        : product.image
-                                    : '/images/default.png'
-                            }
+                            src={getFullImageUrl(product.image)}
                             alt={product.name}
                             fluid
                         />
-
 
                     </Col>
 
