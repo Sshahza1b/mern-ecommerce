@@ -25,12 +25,23 @@ function checkFileType(file, cb) {
     }
 }
 
-const upload = multer({ storage });
+const upload = multer({
+    storage,
+    fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    },
+});
+
 
 router.post('/', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        res.status(400).send({ message: 'No file uploaded' });
+        return;
+    }
+
     res.send({
         message: 'File uploaded successfully',
-        image: `/uploads/${req.file.filename}`,
+        image: `/uploads/${req.file.filename}`, // save this path in DB
     });
 });
 
