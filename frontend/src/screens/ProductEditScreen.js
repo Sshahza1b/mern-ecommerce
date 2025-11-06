@@ -60,27 +60,26 @@ const ProductEditScreen = () => {
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append("image", file);
         setUploading(true);
 
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            };
+            const { data } = await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/api/upload`,
+                formData,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            );
 
-            const { data } = await axios.post('/api/upload', formData, config);
-
-            // ✅ FIX: save only the image path (not full object)
-            setImage(data.image);
-
+            setImage(data.image); // save only the image path
             setUploading(false);
         } catch (error) {
-            console.error('Image Upload Error:', error);
+            console.error("Image Upload Error:", error);
             setUploading(false);
         }
     };
+
 
     // ✅ Submit handler
     const submitHandler = (e) => {
