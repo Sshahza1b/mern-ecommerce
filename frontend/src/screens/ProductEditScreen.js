@@ -57,26 +57,46 @@ const ProductEditScreen = () => {
     }, [dispatch, navigate, productId, product, successUpdate]);
 
     // ✅ Upload image handler
+    // const uploadFileHandler = async (e) => {
+    //     const file = e.target.files[0];
+    //     const formData = new FormData();
+    //     formData.append("image", file);
+    //     setUploading(true);
+
+    //     try {
+    //         const { data } = await axios.post(
+    //             `${process.env.REACT_APP_BACKEND_URL}/api/upload`,
+    //             formData,
+    //             {
+    //                 headers: { "Content-Type": "multipart/form-data" },
+    //             }
+    //         );
+
+    //         setImage(data.image); // save only the image path
+    //         setUploading(false);
+    //     } catch (error) {
+    //         console.error("Image Upload Error:", error);
+    //         setUploading(false);
+    //     }
+    // };
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
         const formData = new FormData();
-        formData.append("image", file);
-        setUploading(true);
+        formData.append('image', file);
 
         try {
-            const { data } = await axios.post(
-                `${process.env.REACT_APP_BACKEND_URL}/api/upload`,
-                formData,
-                {
-                    headers: { "Content-Type": "multipart/form-data" },
-                }
-            );
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
 
-            setImage(data.image); // save only the image path
-            setUploading(false);
+            // const { data } = await axios.post('/api/upload', formData, config);
+            const { data } = await axios.post('http://localhost:5000/api/upload', formData, config);
+
+            setImage(data.image); // e.g. /uploads/image-12345.png
         } catch (error) {
-            console.error("Image Upload Error:", error);
-            setUploading(false);
+            console.error('Image Upload Error:', error);
         }
     };
 

@@ -22,16 +22,15 @@
 
 // utils/imageUtils.js
 export const getFullImageUrl = (imagePath) => {
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  if (!imagePath) return ''; // handle empty image
 
-  if (!imagePath) return '/images/default.png';
-
-  // If the image is in the uploads folder on the server
-  if (imagePath.startsWith('/uploads')) {
-    return `${backendUrl}${imagePath}`; // e.g. https://your-backend.onrender.com/uploads/xxx
+  // If already an absolute URL (e.g. https://)
+  if (imagePath.startsWith('http')) {
+    return imagePath;
   }
 
-  // If the image is an external URL (like Cloudinary, etc)
-  return imagePath;
+  // For dev mode (localhost), prepend backend URL
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+  return `${backendUrl}${imagePath}`;
 };
 
